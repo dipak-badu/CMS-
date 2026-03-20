@@ -8,11 +8,13 @@ import {
 import HomePage from "../pages/home/HomePage";
 import ForgetPassword from "../pages/home/auth/ForgetPassword";
 import NOtFound from "../pages/error/NotFound";
+import Dashboard from "../App";
 
 const routerData = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
+  { path: "/login", element: <HomePage /> },
   { path: "/forget-password", Component: ForgetPassword },
   { path: "*", Component: NOtFound },
+  { path: "/", Component: Dashboard },
 ]);
 
 export default function RouterConfig() {
