@@ -1,88 +1,220 @@
+import { LuCircleUserRound } from "react-icons/lu";
 import Logo from "../../component/logo/Logo";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { FaSearch } from "react-icons/fa";
-import { IoIosNotifications } from "react-icons/io";
 export default function Dashboard() {
   return (
-    <section className="flex w-full h-screen rounded-md fixed">
-      <div className="w-1/5 h-full bg-emerald-800  ">
-        <div className="mt-2 h-12  flex gap-2  mx-2 justify-between ">
-          <div className="flex gap-2">
-            <Logo className="h-12 w-12 "></Logo>
-            <span className="text-2xl text-green-100 font-bold mt-2 ">CMS</span>
-          </div>
-          <div className=" text-green-100 hover:cursor-pointer text-2xl mt-3">
-            <GiHamburgerMenu />
-          </div>
+    <section className="w-full  h-screen bg-gray-100">
+      <header className=" py-2 px-5 w-full shadow bg-gray-300  dark:bg-gray-900 dark:text-emerald-50 flex justify-between text-emerald-900 ">
+        <div className="flex items-center gap-4">
+          <Logo className=" h-10 w-10    "></Logo>
+          <span className="text-2xl font-semibold  text-shadow-lg">PeaGo</span>
         </div>
-
-        <hr className=" flex mx-auto shadow shadow-amber-100 mt-3   text-green-100" />
-        <div className=" flex  flex-col gap-4 text-xl text-green-100 mt-4 ml-4">
-          <div>
-            <a href="dashboard">DashBoard </a>
-          </div>
-          <div>
-            <a href="inqueries">Inqueries</a>
-          </div>
-          <div>
-            <a href="order">Order</a>
-          </div>
-          <div>
-            <a href="products">Products</a>
-          </div>
-          <div>
-            <a href="customer">Customers</a>
-          </div>
-          <div>
-            <a href="discount">Discount</a>
-          </div>
-          <div>
-            <a href="payments">Payments</a>
-          </div>
-        </div>
-      </div>
-      {/* right side  */}
-
-      <div className="w-4/5 bg-gray-200">
-        <nav className="h-12 flex items-center mt-2 mx-4">
-          <span className="text-2xl text-gray-500 font-bold   ">Dashboard</span>
-          <div className="flex  w-full justify-end  gap-4 mr-8">
-            {/* search  */}
-            <div className="relative w-sm text-gray-500">
-              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full pl-10 pr-3 py-1 border rounded-full outline-none focus:ring-2 focus:ring-emerald-500"
-              />
-            </div>
-            {/* admin  */}
-            {/* <div className="text-gray-500  h-2 w-2 rouded-full bg-gray-100 text-xl">
-              <IoIosNotifications />
-            </div> */}
-            <div>
-              <a
-                href="login"
-                className=" transition hover:scale-98 text-gray-500 "
+        <div className="flex item-center gap-2 ">
+          <div className="relative inline-flex">
+            <span className="inline-flex  overflow-hidden rounded  shadow-sm">
+              <button
+                type="button"
+                className=" flex items-center gap-3 text-sm font-medium transition-colors focus:relative cursor-pointer"
               >
-                Login
+                <LuCircleUserRound className="size-8" />
+                <span>Dipak Badu</span>
+              </button>
+            </span>
+
+            <div
+              role="menu"
+              className=" hidden absolute enset-end-0 top-12 z-auto w-56 overflow-hidden rounded border border-gray-300 bg-white shadow-sm"
+            >
+              <a
+                href="#"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900"
+                role="menuitem"
+              >
+                Storefront
+              </a>
+
+              <a
+                href="#"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900"
+                role="menuitem"
+              >
+                Warehouse
+              </a>
+
+              <a
+                href="#"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gray-900"
+                role="menuitem"
+              >
+                Stock
+              </a>
+
+              <button
+                type="button"
+                className="block w-full px-3 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-50 ltr:text-left rtl:text-right"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="flex w-full gap-5">
+        <aside className="w-64">
+          <div className="flex h-screen flex-col justify-between border-e border-gray-100 bg-white dark:bg-gray-800 dark:text-emerald-50">
+            <div className="p-4">
+              <ul className=" space-y-1">
+                <li>
+                  <a
+                    href="#"
+                    className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                  >
+                    General
+                  </a>
+                </li>
+
+                <li>
+                  <details className="group [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                      <span className="text-sm font-medium"> Teams </span>
+
+                      <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="size-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </span>
+                    </summary>
+
+                    <ul className="mt-2 space-y-1 px-4">
+                      <li>
+                        <a
+                          href="#"
+                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                          Banned Users
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          href="#"
+                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                          Calendar
+                        </a>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+
+                <li>
+                  <a
+                    href="#"
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    Billing
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    href="#"
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    Invoices
+                  </a>
+                </li>
+
+                <li>
+                  <details className="group [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                      <span className="text-sm font-medium"> Account </span>
+
+                      <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="size-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </span>
+                    </summary>
+
+                    <ul className="mt-2 space-y-1 px-4">
+                      <li>
+                        <a
+                          href="#"
+                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                          Details
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          href="#"
+                          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                          Security
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          href="#"
+                          className="w-full rounded-lg px-4 py-2 [text-align:inherit] text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        >
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </div>
+
+            <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
+              <a
+                href="#"
+                className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50"
+              >
+                <img
+                  alt=""
+                  src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?auto=format&amp;fit=crop&amp;q=80&amp;w=1160"
+                  className="size-10 rounded-full object-cover"
+                />
+
+                <div className=" dark:text-black">
+                  <p className="text-xs">
+                    <strong className="block font-medium">
+                      Eric Frusciante
+                    </strong>
+
+                    <span> eric@frusciante.com </span>
+                  </p>
+                </div>
               </a>
             </div>
           </div>
-        </nav>
-        <hr className=" flex mx-auto shadow shadow-gray-900 mt-3   text-green-100" />
-        <div w-full h-auto>
-          {/* <div className="text-gray-500">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              magni mollitia sit. Iusto placeat culpa rem dolores aliquid?
-              Aperiam, quae iure magni repellat alias omnis eligendi in
-              praesentium ullam neque.
-            </p>
-          </div> */}
-        </div>
-      </div>
+        </aside>
+        <section>main content</section>
+      </main>
+      <footer></footer>
     </section>
   );
 }
