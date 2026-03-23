@@ -9,7 +9,11 @@ export default function () {
       </FormLabel>
 
       <div className="w-2/3 flex flex-col gap-1">
-        <TextInput type="email" name="" />
+        <TextInput
+          type="email"
+          name=""
+          // onChange={(e) => console.log(e.target.value)}
+        />
       </div>
     </div>
   );
