@@ -8,13 +8,26 @@ import {
 import HomePage from "../pages/home/HomePage";
 import ForgetPassword from "../pages/home/auth/ForgetPassword";
 import NOtFound from "../pages/error/NotFound";
-import Dashboard from "../pages/dashboard/Dashboard";
+import AdminDashboard from "../pages/dashboard/Dashboard";
+import UserList from "../pages/dashboard/user/UserList";
+
+import AminLayout from "./../pages/layouts/AdminLayout";
 
 const routerData = createBrowserRouter([
   { path: "/", element: <HomePage /> },
   { path: "/forget-password", Component: ForgetPassword },
+  {
+    path: "admin",
+    Component: AminLayout,
+    children: [
+      { index: true, Component: AdminDashboard },
+      { path: "users", Component: UserList },
+    ],
+  },
+
   { path: "*", Component: NOtFound },
-  { path: "/admin", Component: Dashboard },
+  // { path: "/admin", Component: AdminDashboard },
+  // { path: "/admin/users", Component: UserList },
 ]);
 
 export default function RouterConfig() {
