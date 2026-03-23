@@ -12,6 +12,7 @@ import AdminDashboard from "../pages/dashboard/Dashboard";
 import UserList from "../pages/dashboard/user/UserList";
 
 import AminLayout from "./../pages/layouts/AdminLayout";
+import UserLayout from "../pages/layouts/UserLaayout";
 
 const routerData = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -26,8 +27,15 @@ const routerData = createBrowserRouter([
   },
 
   { path: "*", Component: NOtFound },
-  // { path: "/admin", Component: AdminDashboard },
-  // { path: "/admin/users", Component: UserList },
+
+  {
+    path: "/user",
+    Component: UserLayout,
+    children: [
+      { index: true, element: <>User detal page</> },
+      { path: "profile", element: <>User profile page</> },
+    ],
+  },
 ]);
 
 export default function RouterConfig() {
