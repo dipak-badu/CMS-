@@ -12,7 +12,7 @@ export const TextInput = ({
       <input
         type={type}
         name={name}
-        placeholder={`Enter your name`}
+        placeholder={`Enter your ${name}..`}
         className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white ${className}`}
         onChange={handleChange}
       />
