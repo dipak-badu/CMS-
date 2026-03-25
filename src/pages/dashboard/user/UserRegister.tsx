@@ -34,7 +34,7 @@ export default function () {
   };
 
   return (
-    <section className="flex flex-col h-auto rounded-lg my-10  w-[70vw] mx-auto bg-gray-800 text-white shadow-lg">
+    <section className="flex flex-col h-auto rounded-lg my-10  w-full mx-auto bg-gray-800 text-white shadow-lg">
       <h1 className="text-3xl font-bold text-center pt-6">
         User Register Page
       </h1>
