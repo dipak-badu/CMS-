@@ -7,24 +7,35 @@ import type {
   IFileTypeProps,
 } from "../Form.contract";
 
+import { Controller } from "react-hook-form";
+
 export const TextInput = ({
   type = "text",
   name,
   className = "",
   errMsg = "",
-  handleChange,
+  control,
 }: Readonly<ITextInputProps>) => {
   return (
-    <>
-      <input
-        type={type}
-        name={name}
-        placeholder={`Enter your ${name}..`}
-        className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white ${className}`}
-        onChange={handleChange}
-      />
-      <span className="text-red-800 text-sm italic">{errMsg}</span>
-    </>
+    <Controller
+      control={control}
+      name={name}
+      defaultValue={""}
+      render={(field: any) => {
+        return (
+          <>
+            <input
+              type={type}
+              {...field}
+              placeholder={`Enter your ${name}..`}
+              className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white ${className}`}
+              // onChange={handleChange}
+            />
+            <span className="text-red-800 text-sm italic">{errMsg}</span>
+          </>
+        );
+      }}
+    ></Controller>
   );
 };
 

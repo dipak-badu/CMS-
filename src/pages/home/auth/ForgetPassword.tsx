@@ -1,9 +1,35 @@
 import Logo from "../../../component/logo/Logo";
 import { H1 } from "../../../component/ui/typography/PageTitle";
-import UserName from "../../../component/ui/form/UserName";
-import Password from "../../../component/ui/form/Password";
+
 import Button from "../../../component/ui/form/Button";
+import { FormLabel } from "../../../component/ui/form/Label";
+import { TextInput } from "../../../component/ui/form/login/Input";
+import { useForm } from "react-hook-form";
+import {
+  LOginSchema,
+  type ICredential,
+} from "../../../component/auth/Auth.contract";
+import { zodResolver } from "@hookform/resolvers/zod";
 export default function ForgetPassword() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ICredential>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+    resolver: zodResolver(LOginSchema),
+  });
+
+  const submitHandle = (data: ICredential) => {
+    try {
+    } catch (exception: any) {
+      console.log(exception);
+    }
+  };
+
   return (
     <section className=" bg-gray-300 flex h-screen p-5  gap-2  sm:flex sm:flex-row md:flex-row ">
       <div className="w-1/3 bg-emerald-800 rounded-md p-10 items-center justify-center flex flex-col gap-5 text-white">
@@ -23,12 +49,43 @@ export default function ForgetPassword() {
           </H1>
         </div>
         {/* //!login form component */}
-        <form action="" className="flex flex-col gap-5">
-          <UserName />
-          <Password />
+        <form
+          onSubmit={handleSubmit(submitHandle)}
+          className="flex flex-col gap-5"
+        >
+          <div className="flex w-full items-center">
+            <FormLabel htmlFor="password" className="">
+              Username:
+            </FormLabel>
+            <div className="w-2/3 flex flex-col gap-1">
+              <TextInput
+                type="email"
+                name="username"
+                control={control}
+                errMsg={errors?.username?.message}
+              />
+            </div>
+          </div>
+
+          <div className="flex w-full items-center">
+            <FormLabel htmlFor="password" className="">
+              Password:
+            </FormLabel>
+            <div className="w-2/3 flex flex-col gap-1">
+              <TextInput
+                type="password"
+                name="password"
+                control={control}
+                errMsg={errors?.username?.message}
+              />
+            </div>
+          </div>
           <div className="flex w-full items-center gap-3 justify-end">
-            <Button className=" hover:bg-teal-700  bg-teal-800 w-2/3">
-              submit{" "}
+            <Button
+              type="submit"
+              className=" hover:bg-teal-700  bg-teal-800 w-2/3"
+            >
+              submit
             </Button>
           </div>
         </form>

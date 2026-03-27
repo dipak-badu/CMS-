@@ -17,8 +17,8 @@ export default function LoginForm() {
     try {
       // e.preventDefault();
       // await LOginSchema.parseAsync(credentials);
-    } catch (error) {
-      console.log(error);
+    } catch (exception: any) {
+      console.log(exception);
     }
   };
 
@@ -58,7 +58,7 @@ export default function LoginForm() {
             type="email"
             name="username"
             control={control}
-            errMsg="errors?.username?.message"
+            errMsg={errors?.username?.message}
           />
         </div>
       </div>
@@ -67,7 +67,12 @@ export default function LoginForm() {
           Password:
         </FormLabel>
         <div className="w-2/3 flex flex-col gap-1">
-          <TextInput type="password" name="password" control={control} />
+          <TextInput
+            type="password"
+            name="password"
+            control={control}
+            errMsg={errors?.username?.message}
+          />
         </div>
       </div>
       <div className="flex w-full items-center justify-end">
