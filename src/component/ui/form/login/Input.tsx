@@ -1,4 +1,4 @@
-import type { BaseSyntheticEvent } from "react";
+// import type { BaseSyntheticEvent } from "react";
 import type {
   ISelectOptionProps,
   ISingleOption,
@@ -7,21 +7,20 @@ import type {
   IFileTypeProps,
 } from "../Form.contract";
 
-import { Controller } from "react-hook-form";
+import { Controller, type FieldValues } from "react-hook-form";
 
-export const TextInput = ({
+export const TextInput = <T extends FieldValues>({
   type = "text",
   name,
   className = "",
   errMsg = "",
   control,
-}: Readonly<ITextInputProps>) => {
+}: Readonly<ITextInputProps<T>>) => {
   return (
     <Controller
       control={control}
       name={name}
-      defaultValue={""}
-      render={(field: any) => {
+      render={({ field }) => {
         return (
           <>
             <input
@@ -39,18 +38,18 @@ export const TextInput = ({
   );
 };
 
-export const SelectOption = ({
+export const SelectOption = <T extends FieldValues>({
   name,
   className,
   errMsg,
-  handleChange,
+  control,
   options,
-}: Readonly<ISelectOptionProps>) => {
+}: Readonly<ISelectOptionProps<T>>) => {
   return (
     <>
       <select
         className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white text-gray-600 ${className}`}
-        onChange={handleChange}
+        // onChange={handleChange}
         name={name}
       >
         <option value="">--Select Option--</option>
@@ -66,20 +65,20 @@ export const SelectOption = ({
   );
 };
 
-export const TextArea = ({
+export const TextArea = <T extends FieldValues>({
   className,
-  handleChange,
+  control,
   name,
   errMsg,
   rows,
-}: Readonly<ITextAreadProps>) => {
+}: Readonly<ITextAreadProps<T>>) => {
   return (
     <>
       <textarea
         name={name}
         placeholder={`Enter your ${name}..`}
         className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white resize-none ${className}`}
-        onChange={handleChange}
+        // onChange={handleChange}
         rows={rows}
       ></textarea>
       <span className="text-red-800 text-sm italic">{errMsg}</span>
@@ -87,12 +86,13 @@ export const TextArea = ({
   );
 };
 
-export const FileInput = ({
+export const FileInput = <T extends FieldValues>({
   name,
   className = "",
   errMsg = "",
-  handleChange,
-}: Readonly<IFileTypeProps>) => {
+  // handleChange
+  control,
+}: Readonly<IFileTypeProps<T>>) => {
   return (
     <>
       <input
@@ -101,13 +101,13 @@ export const FileInput = ({
         // multiple={true}
         placeholder={`Enter your ${name}..`}
         className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white ${className}`}
-        onChange={(e: BaseSyntheticEvent) => {
-          // e.target.value  =>for all ohter
-          //! for the file
-          // const files = e.target.files; //? object of ojject as result
-          const files = Object.values(e.target.files);
-          handleChange(name, [files[0] as File]);
-        }}
+        // onChange={(e: BaseSyntheticEvent) => {
+        //   // e.target.value  =>for all ohter
+        //   //! for the file
+        //   // const files = e.target.files; //? object of ojject as result
+        //   // const files = Object.values(e.target.files);
+        //   // handleChange(name, [files[0] as File]);
+        // }}
       />
       <span className="text-red-800 text-sm italic">{errMsg}</span>
     </>

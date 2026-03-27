@@ -3,7 +3,7 @@ import type {
   HTMLInputTypeAttribute,
   ReactNode,
 } from "react";
-import type { Control, Field, FieldValues } from "react-hook-form";
+import type { Control, Field, FieldValues, Path } from "react-hook-form";
 
 export interface IFormLabelProps {
   htmlFor?: string;
@@ -12,7 +12,6 @@ export interface IFormLabelProps {
 }
 
 export interface IBaseType {
-  name: string;
   className?: string;
   errMsg?: string;
 }
@@ -21,6 +20,7 @@ export interface ITextInputProps<T extends FieldValues> extends IBaseType {
   type?: HTMLInputTypeAttribute;
   // handleChange(e: BaseSyntheticEvent): void;
   control: Control<T>;
+  name: Path<T>;
 }
 
 export interface IButtonProps {
@@ -37,14 +37,18 @@ export interface ISelectOptionProps<T extends FieldValues> extends IBaseType {
   options: Array<{ label: string; value: string }>;
   // handleChange(e: BaseSyntheticEvent): void;
   control: Control<T>;
+  name: Path<T>;
 }
 
 export interface ITextAreadProps<T extends FieldValues> extends IBaseType {
   rows?: number;
   // handleChange(e: BaseSyntheticEvent): void;
   control: Control<T>;
+  name: Path<T>;
 }
 
-export interface IFileTypeProps extends IBaseType {
+export interface IFileTypeProps<T extends FieldValues> extends IBaseType {
   // handleChange(name: string, files: Array<File>): void;
+  control: Control<T>;
+  name: Path<T>;
 }
