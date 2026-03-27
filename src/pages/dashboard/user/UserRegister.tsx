@@ -1,9 +1,13 @@
 import type { BaseSyntheticEvent } from "react";
 import { useState } from "react";
 import { FormLabel } from "../../../component/ui/form/Label";
-import { TextInput } from "../../../component/ui/form/login/Input";
+import {
+  TextInput,
+  SelectOption,
+  TextArea,
+  FileInput,
+} from "../../../component/ui/form/login/Input";
 import Button from "../../../component/ui/form/Button";
-import SelectOPtion from "../../../component/ui/form/login/Select";
 import { UserSchema } from "../../../component/auth/Auth.contract";
 
 export default function () {
@@ -30,6 +34,13 @@ export default function () {
     setCredentials({
       ...credentials,
       [name]: value,
+    });
+  };
+
+  const handleFileChange = (name: string, file: File | Array<File>) => {
+    setCredentials({
+      ...credentials,
+      [name]: file,
     });
   };
 
@@ -71,25 +82,36 @@ export default function () {
 
         <div className="flex w-full items-center justify-between ">
           <FormLabel htmlFor="name" className="">
-            Role:
+            Gender:
           </FormLabel>
-          <SelectOPtion />
-        </div>
-        <div className="flex w-full items-center justify-between ">
-          <FormLabel htmlFor="address" className="">
-            Address:
-          </FormLabel>
-          <TextInput
-            type="text"
-            name="address"
-            errMsg=""
+          <SelectOption
+            name="role"
             handleChange={handleInputChange}
-            className="text-gray-950"
+            options={[
+              { label: "Male", value: ",male" },
+              { label: "Female", value: "femele" },
+              { label: "Other", value: "other" },
+            ]}
           />
         </div>
+
         <div className="flex w-full items-center justify-between ">
-          <FormLabel htmlFor="Number" className="">
-            Number:
+          <FormLabel htmlFor="name" className="">
+            Role:
+          </FormLabel>
+          <SelectOption
+            name="role"
+            handleChange={handleInputChange}
+            options={[
+              { label: "Admin user", value: "admin" },
+              { label: "User", value: "user" },
+            ]}
+          />
+        </div>
+
+        <div className="flex w-full items-center justify-between ">
+          <FormLabel htmlFor="address" className="">
+            Phone:
           </FormLabel>
           <TextInput
             type="tel"
@@ -100,14 +122,24 @@ export default function () {
           />
         </div>
         <div className="flex w-full items-center justify-between ">
+          <FormLabel htmlFor="Number" className="">
+            Address:
+          </FormLabel>
+          <TextArea
+            name="address"
+            errMsg=""
+            handleChange={handleInputChange}
+            rows={4}
+          />
+        </div>
+        <div className="flex w-full items-center justify-between ">
           <FormLabel htmlFor="image" className="">
             Image:
           </FormLabel>
-          <TextInput
-            type="file"
+          <FileInput
             name="image"
             errMsg=""
-            handleChange={handleInputChange}
+            handleChange={handleFileChange}
             className="text-gray-950"
           />
         </div>

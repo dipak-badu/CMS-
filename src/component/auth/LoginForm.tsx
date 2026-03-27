@@ -1,33 +1,53 @@
 import Button from "../ui/form/Button";
 import { TextInput } from "../ui/form/login/Input";
 import { FormLabel } from "../ui/form/Label";
-import { useState, type BaseSyntheticEvent } from "react";
-import { LOginSchema } from "./Auth.contract";
-export default function LoginForm() {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
+// import { useState, type BaseSyntheticEvent } from "react";
+import { LOginSchema, type ICredential } from "./Auth.contract";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+// import Password from "../ui/form/Password";
 
-  const submitHandle = async (e: BaseSyntheticEvent) => {
+export default function LoginForm() {
+  // const [credentials, setCredentials] = useState({
+  //   username: "",
+  //   password: "",
+  // });
+
+  const submitHandle = async (credintial: ICredential) => {
     try {
-      e.preventDefault();
-      await LOginSchema.parseAsync(credentials);
+      // e.preventDefault();
+      // await LOginSchema.parseAsync(credentials);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleInputChange = (e: BaseSyntheticEvent) => {
-    const { name, value } = e.target;
-    setCredentials({
-      ...credentials,
-      [name]: value,
-    });
-  };
+  // const handleInputChange = (e: BaseSyntheticEvent) => {
+  //   const { name, value } = e.target;
+  //   setCredentials({
+  //     ...credentials,
+  //     [name]: value,
+  //   });
+  // };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ICredential>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+    resolver: zodResolver(LOginSchema),
+  });
 
   return (
-    <form onSubmit={submitHandle} action="" className="flex flex-col gap-5">
+    <form
+      onSubmit={handleSubmit(submitHandle)}
+      action=""
+      className="flex flex-col gap-5"
+    >
       <div className="flex w-full items-center">
         <FormLabel htmlFor="username" className="">
           User Name:
@@ -37,7 +57,8 @@ export default function LoginForm() {
           <TextInput
             type="email"
             name="username"
-            handleChange={handleInputChange}
+            control={control}
+            errMsg="errors?.username?.message"
           />
         </div>
       </div>
@@ -46,11 +67,7 @@ export default function LoginForm() {
           Password:
         </FormLabel>
         <div className="w-2/3 flex flex-col gap-1">
-          <TextInput
-            type="password"
-            name="password"
-            handleChange={handleInputChange}
-          />
+          <TextInput type="password" name="password" control={control} />
         </div>
       </div>
       <div className="flex w-full items-center justify-end">

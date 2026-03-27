@@ -1,4 +1,10 @@
 import { z } from "zod";
+
+export interface ICredential {
+  username: string;
+  password: string;
+}
+
 export const LOginSchema = z.object({
   username: z
     .email("Invalid email format")
