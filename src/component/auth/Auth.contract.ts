@@ -5,6 +5,16 @@ export interface ICredential {
   password: string;
 }
 
+export interface IUserRegisterCredintial {
+  name: string;
+  username: string;
+  gender: string;
+  role: string;
+  address: string;
+  phone: string;
+  image: File;
+}
+
 export const LOginSchema = z.object({
   username: z
     .email("Invalid email format")
@@ -13,11 +23,16 @@ export const LOginSchema = z.object({
   password: z.string().nonempty("Password is required").nonoptional(),
 });
 
-export const UserSchema = z.object({
-  name: z.string().nonempty().nonoptional(),
-  username: z.email().min(5).max(20),
-  role: z.string(),
-  address: z.string().nonempty().nonoptional(),
-  phone: z.number().min(1000000000).max(9999999999),
-  image: z.string().url().optional(),
+export const UserRegisterSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  username: z.string().min(4, "usdrname is requiredd"),
+  gender: z.string().nonempty("gender is required"),
+  role: z.string().nonempty("role is required"),
+  address: z.string().nonempty("address is required"),
+  phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
+
+  image: z
+    .any()
+    .transform((files) => files?.[0])
+    .refine((file) => file instanceof File, "Image is required"),
 });

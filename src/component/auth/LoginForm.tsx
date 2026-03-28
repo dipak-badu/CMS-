@@ -71,7 +71,7 @@ export default function LoginForm() {
             type="password"
             name="password"
             control={control}
-            errMsg={errors?.username?.message}
+            errMsg={errors?.password?.message}
           />
         </div>
       </div>

@@ -7,7 +7,7 @@ import type {
   IFileTypeProps,
 } from "../Form.contract";
 
-import { Controller, type FieldValues } from "react-hook-form";
+import { Controller, useController, type FieldValues } from "react-hook-form";
 
 export const TextInput = <T extends FieldValues>({
   type = "text",
@@ -45,12 +45,16 @@ export const SelectOption = <T extends FieldValues>({
   control,
   options,
 }: Readonly<ISelectOptionProps<T>>) => {
+  const { field } = useController({
+    name: name,
+    control: control,
+  });
   return (
     <>
       <select
         className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white text-gray-600 ${className}`}
         // onChange={handleChange}
-        name={name}
+        {...field}
       >
         <option value="">--Select Option--</option>
         {options &&
@@ -73,16 +77,24 @@ export const TextArea = <T extends FieldValues>({
   rows,
 }: Readonly<ITextAreadProps<T>>) => {
   return (
-    <>
-      <textarea
-        name={name}
-        placeholder={`Enter your ${name}..`}
-        className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white resize-none ${className}`}
-        // onChange={handleChange}
-        rows={rows}
-      ></textarea>
-      <span className="text-red-800 text-sm italic">{errMsg}</span>
-    </>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => {
+        return (
+          <>
+            <textarea
+              {...field}
+              placeholder={`Enter your ${name}..`}
+              className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white resize-none ${className}`}
+              // onChange={handleChange}
+              rows={rows}
+            ></textarea>
+            <span className="text-red-800 text-sm italic">{errMsg}</span>
+          </>
+        );
+      }}
+    />
   );
 };
 
@@ -93,11 +105,21 @@ export const FileInput = <T extends FieldValues>({
   // handleChange
   control,
 }: Readonly<IFileTypeProps<T>>) => {
+  const { field } = useController({
+    name: name,
+    control: control,
+  });
   return (
     <>
       <input
         type={`file`}
-        name={name}
+        name={field.name}
+        ref={field.ref}
+        onBlur={field.onBlur}
+        onChange={(e) => {
+          const files = e.target.files;
+          field.onChange(files);
+        }}
         // multiple={true}
         placeholder={`Enter your ${name}..`}
         className={`border border-gray-300 w-full p-2 rounded-md shadow bg-white ${className}`}

@@ -1,5 +1,6 @@
-import type { BaseSyntheticEvent } from "react";
-import { useState } from "react";
+// import type { BaseSyntheticEvent } from "react";
+// import { useState } from "react";
+import toast from "react-hot-toast";
 import { FormLabel } from "../../../component/ui/form/Label";
 import {
   TextInput,
@@ -8,49 +9,59 @@ import {
   FileInput,
 } from "../../../component/ui/form/login/Input";
 import Button from "../../../component/ui/form/Button";
-import { UserSchema } from "../../../component/auth/Auth.contract";
+import {
+  UserRegisterSchema,
+  type IUserRegisterCredintial,
+} from "../../../component/auth/Auth.contract";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function () {
-  const [credentials, setCredentials] = useState({
-    name: "",
-    username: "",
-    role: "",
-    address: "",
-    phone: "",
-    image: "",
-  });
+  // const [credentials, setCredentials] = useState({
+  //   name: "",
+  //   username: "",
+  //   role: "",
+  //   address: "",
+  //   phone: "",
+  //   image: "",
+  // });
 
-  const submithandle = async (e: BaseSyntheticEvent) => {
+  const submithandle = async (data: IUserRegisterCredintial) => {
     try {
-      e.preventDefault();
-      await UserSchema.parseAsync(credentials);
-    } catch (error) {
-      console.log(error);
+      // e.preventDefault();
+      // await UserSchema.parseAsync(credentials);
+      toast.success("user rgistered successfully");
+      reset();
+    } catch (exception: any) {
+      toast.error("something went wrong!!");
+      console.log(exception);
     }
   };
 
-  const handleInputChange = (e: BaseSyntheticEvent) => {
-    const { name, value } = e.target;
-    setCredentials({
-      ...credentials,
-      [name]: value,
-    });
-  };
-
-  const handleFileChange = (name: string, file: File | Array<File>) => {
-    setCredentials({
-      ...credentials,
-      [name]: file,
-    });
-  };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IUserRegisterCredintial>({
+    defaultValues: {
+      name: "",
+      username: "",
+      gender: "",
+      role: "",
+      address: "",
+      phone: "",
+    },
+    resolver: zodResolver(UserRegisterSchema),
+  });
 
   return (
-    <section className="flex flex-col h-auto rounded-lg my-10  w-full mx-auto bg-gray-800 text-white shadow-lg">
-      <h1 className="text-3xl font-bold text-center pt-6">
+    <section className="flex flex-col h-auto rounded-lg w-full  wmx-auto bg-gray-800 text-white shadow-lg">
+      <h1 className="text-3xl font-bold text-center pt-2">
         User Register Page
       </h1>
       <form
-        onSubmit={submithandle}
+        onSubmit={handleSubmit(submithandle)}
         action=""
         className="flex  flex-col h-auto mx-4  py-6 gap-6"
       >
@@ -61,8 +72,8 @@ export default function () {
           <TextInput
             type="text"
             name="name"
-            errMsg=""
-            handleChange={handleInputChange}
+            errMsg={errors?.name?.message}
+            control={control}
             className="text-gray-950"
           />
         </div>
@@ -74,8 +85,9 @@ export default function () {
           <TextInput
             type="email"
             name="username"
-            errMsg=""
-            handleChange={handleInputChange}
+            errMsg={errors?.username?.message}
+            // handleChange={handleInputChange}
+            control={control}
             className="text-gray-950"
           />
         </div>
@@ -85,8 +97,9 @@ export default function () {
             Gender:
           </FormLabel>
           <SelectOption
-            name="role"
-            handleChange={handleInputChange}
+            name="gender"
+            control={control}
+            errMsg={errors?.gender?.message}
             options={[
               { label: "Male", value: ",male" },
               { label: "Female", value: "femele" },
@@ -101,7 +114,7 @@ export default function () {
           </FormLabel>
           <SelectOption
             name="role"
-            handleChange={handleInputChange}
+            control={control}
             options={[
               { label: "Admin user", value: "admin" },
               { label: "User", value: "user" },
@@ -116,8 +129,8 @@ export default function () {
           <TextInput
             type="tel"
             name="phone"
-            errMsg=""
-            handleChange={handleInputChange}
+            errMsg={errors?.phone?.message}
+            control={control}
             className="text-gray-950"
           />
         </div>
@@ -127,8 +140,8 @@ export default function () {
           </FormLabel>
           <TextArea
             name="address"
-            errMsg=""
-            handleChange={handleInputChange}
+            errMsg={errors?.address?.message}
+            control={control}
             rows={4}
           />
         </div>
@@ -138,8 +151,8 @@ export default function () {
           </FormLabel>
           <FileInput
             name="image"
-            errMsg=""
-            handleChange={handleFileChange}
+            errMsg={errors?.image?.message}
+            control={control}
             className="text-gray-950"
           />
         </div>

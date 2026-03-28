@@ -216,7 +216,7 @@ export default function AminLayout() {
               </div>
             </div>
           </aside>
-          <section>
+          <section className="w-full">
             <Outlet />
           </section>
         </main>
