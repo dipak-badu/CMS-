@@ -16,7 +16,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export default function () {
+export default function UserRegister() {
   // const [credentials, setCredentials] = useState({
   //   name: "",
   //   username: "",
