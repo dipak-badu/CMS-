@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 export default function AdminSidebar({ loggedInUser }) {
   return (
     <aside className="w-64">
-      <div className="flex h-[90vh] flex-col justify-between border-e border-gray-100 bg-white dark:bg-gray-800 dark:text-emerald-50">
+      <div className="flex h-[90vh] flex-col justify-between border-e border-gray-100 bg-white  ">
         <div className="p-4">
           <ul className=" space-y-1">
             {loggedInUser && loggedInUser.role === "admin" && (
@@ -82,7 +82,7 @@ export default function AdminSidebar({ loggedInUser }) {
           </ul>
         </div>
 
-        <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
+        {/* <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
           <NavLink
             to="#"
             className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50"
@@ -101,7 +101,7 @@ export default function AdminSidebar({ loggedInUser }) {
               </p>
             </div>
           </NavLink>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

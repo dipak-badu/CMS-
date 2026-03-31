@@ -1,6 +1,3 @@
-// import type { BaseSyntheticEvent } from "react";
-// import { useState } from "react";
-import toast from "react-hot-toast";
 import { FormLabel } from "../../../component/ui/form/Label";
 import {
   TextInput,
@@ -16,24 +13,13 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export default function UserRegister() {
-  // const [credentials, setCredentials] = useState({
-  //   name: "",
-  //   username: "",
-  //   role: "",
-  //   address: "",
-  //   phone: "",
-  //   image: "",
-  // });
-
-  const submithandle = async (data: IUserRegisterCredintial) => {
+export default function UserEdit() {
+  const submithandle = (data: IUserRegisterCredintial) => {
     try {
-      // e.preventDefault();
-      // await UserSchema.parseAsync(credentials);
-      toast.success("user rgistered successfully");
+      console.log(data);
+
       reset();
-    } catch (exception: any) {
-      toast.error("something went wrong!!");
+    } catch (exception) {
       console.log(exception);
     }
   };
@@ -43,23 +29,13 @@ export default function UserRegister() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IUserRegisterCredintial>({
-    defaultValues: {
-      name: "",
-      username: "",
-      gender: "",
-      role: "",
-      address: "",
-      phone: "",
-    },
+  } = useForm({
+    defaultValues: {},
     resolver: zodResolver(UserRegisterSchema),
   });
-
   return (
     <section className="flex flex-col h-auto rounded-lg w-full  wmx-auto bg-gray-300 text-gray-950 shadow-lg">
-      <h1 className="text-3xl font-bold text-center pt-2">
-        User Register Page
-      </h1>
+      <h1 className="text-3xl font-bold text-center pt-2">User Edit page</h1>
       <form
         onSubmit={handleSubmit(submithandle)}
         action=""
@@ -152,7 +128,7 @@ export default function UserRegister() {
           </FormLabel>
           <FileInput
             name="image"
-            errMsg={errors?.image?.message}
+            // errMsg={errors?.image?.message}
             control={control}
             className="text-gray-950"
           />
@@ -160,7 +136,7 @@ export default function UserRegister() {
         <div className="w-238 ml-auto">
           <Button
             className=" hover:bg-teal-700 w-full bg-teal-800 transform transition-transform duration-200 hover:scale-95
-             "
+              "
             type="submit "
           >
             {" "}

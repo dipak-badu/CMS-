@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   // Route,
   RouterProvider,
+  useRevalidator,
   // Routes,
 } from "react-router";
 import HomePage from "../pages/home/HomePage";
@@ -14,6 +15,7 @@ import UserList from "../pages/dashboard/user/UserList";
 import AminLayout from "./../pages/layouts/AdminLayout";
 import UserLayout from "../pages/layouts/UserLaayout";
 import UserRegister from "../pages/dashboard/user/UserRegister";
+import UserEdit from "../pages/dashboard/user/UserEdit";
 
 const routerData = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -25,6 +27,7 @@ const routerData = createBrowserRouter([
       { index: true, Component: AdminDashboard },
       { path: "users", Component: UserList },
       { path: "users/create", Component: UserRegister },
+      { path: "users/edit", Component: UserEdit },
     ],
   },
 

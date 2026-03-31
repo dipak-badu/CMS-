@@ -3,7 +3,7 @@ import type {
   HTMLInputTypeAttribute,
   ReactNode,
 } from "react";
-import type { Control, Field, FieldValues, Path } from "react-hook-form";
+import type { Control, FieldValues, Path } from "react-hook-form";
 
 export interface IFormLabelProps {
   htmlFor?: string;

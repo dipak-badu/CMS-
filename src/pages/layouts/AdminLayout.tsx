@@ -10,7 +10,7 @@ export default function AminLayout() {
   return (
     <>
       <section className="w-full  h-screen bg-gray-400">
-        <header className=" py-2 px-5 w-full shadow bg-gray-300  dark:bg-gray-900 dark:text-emerald-50 flex justify-between text-emerald-900 ">
+        <header className=" py-2 px-5 w-full shadow bg-gray-300  flex justify-between text-emerald-900 ">
           <div className="flex items-center gap-4">
             <Logo className=" h-10 w-10    "></Logo>
             <span className="text-2xl font-semibold  text-shadow-lg">

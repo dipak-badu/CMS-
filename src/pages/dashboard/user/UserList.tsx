@@ -1,8 +1,10 @@
 import { H1 } from "../../../component/ui/typography/PageTitle";
 import { NavLink } from "react-router";
 import { IoMdAdd } from "react-icons/io";
+import TdEdit from "../../../component/ui/table/TdEdit";
 import { CiSearch } from "react-icons/ci";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import TdDelete from "../../../component/ui/table/TdDelete";
 export default function UserList() {
   return (
     <section className=" bg-white w-full mt-4   ">
@@ -33,80 +35,233 @@ export default function UserList() {
 
       <div className="w-full mt-5">
         <table className="w-full ">
-          <thead className="bg-gray-800 text-gray-300 font-semibold ">
+          <thead className="bg-gray-300 text-gray-950 font-semibold ">
             <tr>
-              <th className="border border-r-gray-50 border-b-gray-50 p-2 ">
+              <th className="border border-r-gray-500 border-b-gray-50 p-2 flex items-center justify-center ">
                 Full Name
               </th>
-              <th className="border-r border-r-gray-50 p-2">Email</th>
-              <th className="border-r border-r-gray-50 p-2">Role</th>
-              <th className="border-r border-r-gray-50 p-2">Status</th>
-              <th className="border-r border-r-gray-50 p-2">Action</th>
+              <th className="border-r border-r-gray-500 p-2 align-center">
+                Email
+              </th>
+              <th className="border-r border-r-gray-500 p-2 align-center">
+                Role
+              </th>
+              <th className="border-r border-r-gray-500 p-2 align-center">
+                Status
+              </th>
+              <th className="border-r border-r-gray-500 p-2 align-center">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center ">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center ">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center ">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center ">
+                dipak badu
+              </td>
+              <td className="p-3 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
             <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">dipak badu</td>
-              <td className="border border-gray-600 p-2">Edit / Delete</td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className="border border-gray-600 p-2 text-center">
+                dipak badu
+              </td>
+              <td className=" border border-gray-600 p-2 text-center">
+                <div className="flex justify-center items-center gap-3">
+                  {/* Edit Button */}
+                  <TdEdit />
+
+                  {/* Delete Button */}
+                  <TdDelete />
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
