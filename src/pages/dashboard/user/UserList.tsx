@@ -23,7 +23,7 @@ export default function UserList() {
             <CiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-lg text-gray-600" />
           </div>
           <NavLink
-            to="/admin/users/create"
+            to="/admin/user/create"
             className={`
         bg-teal-700 px-3 py-1  text-gray-300 flex items-center hover:cursor-pointer gap-1 rounded-md transiotn duration-500 hover:scale-95`}
           >

@@ -6,7 +6,7 @@ import { LOginSchema, type ICredential } from "./Auth.contract";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 // import Password from "../ui/form/Password";
-
+import Cookies from "js-cookie";
 export default function LoginForm() {
   // const [credentials, setCredentials] = useState({
   //   username: "",
@@ -17,6 +17,46 @@ export default function LoginForm() {
     try {
       // e.preventDefault();
       // await LOginSchema.parseAsync(credentials);
+      const response = {
+        token: "alphanumeric text",
+      };
+      //? web storage
+      //!cookies, local storage, session storage
+      //? cookies: small data, sent with every request, can be httpOnly, secure, sameSite -> clint side cookie and server side cookie
+
+      //!js default
+      document.cookie = `token=abc123; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=strict`;
+      document.cookie =
+        "token=" + response.token + "; expiresIn = " + new Date() + "path=/;";
+      //!  using js-cookie
+      //!set cookie
+      // Cookies.set("token", response.token, {
+      //   // domain:""
+      //   path: "/",
+      //   expires: 1,
+      //   secure: true, //!onny transfer to server if https is available
+      //   sameSite: "Lax", //!corssorigin uses
+      // });
+      //! remove cookie
+      // Cookies.remove("token")
+      //! get cookie
+      // const data = Cookies.get("token");
+      // console.log(data);
+
+      //? local storage: larger data, persists until cleared, not sent with requests, accessible via JavaScript
+      //! js default
+      // localStorage.setItem("token", response.token);
+      // localStorage.getItem("token");
+      // localStorage.remove("token"); // keu token reomved
+      // localStorage.clear(); //all localStorage items are removed
+
+      //? session storage: similar to local storage but cleared when the page session ends (e.g., tab closed)
+      // sessionStorage.setItem("token", response.token);
+      // sessionStorage.getItem("token");
+      // sessionStorage.removeItem("token");
+      // sessionStorage.clear();
+
+      console.log(credintial);
     } catch (exception: any) {
       console.log(exception);
     }

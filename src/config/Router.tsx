@@ -16,6 +16,7 @@ import AminLayout from "./../pages/layouts/AdminLayout";
 import UserLayout from "../pages/layouts/UserLaayout";
 import UserRegister from "../pages/dashboard/user/UserRegister";
 import UserEdit from "../pages/dashboard/user/UserEdit";
+import UserDetail from "../pages/dashboard/user/UserDetail";
 
 const routerData = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -26,8 +27,9 @@ const routerData = createBrowserRouter([
     children: [
       { index: true, Component: AdminDashboard },
       { path: "users", Component: UserList },
-      { path: "users/create", Component: UserRegister },
-      { path: "users/edit", Component: UserEdit },
+      { path: "user/create", Component: UserRegister },
+      { path: "user/:id/edit", Component: UserEdit },
+      { path: "user/:id/detail", element: <UserDetail /> },
     ],
   },
 

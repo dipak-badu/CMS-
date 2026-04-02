@@ -7,7 +7,7 @@ import type { Control, FieldValues, Path } from "react-hook-form";
 
 export interface IFormLabelProps {
   htmlFor?: string;
-  className: string;
+  className?: string;
   children: ReactNode;
 }
 
