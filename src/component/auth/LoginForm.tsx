@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 // import Password from "../ui/form/Password";
 import Cookies from "js-cookie";
+import axiosInstance from "../../config/ApiClint";
 export default function LoginForm() {
   // const [credentials, setCredentials] = useState({
   //   username: "",
@@ -17,17 +18,17 @@ export default function LoginForm() {
     try {
       // e.preventDefault();
       // await LOginSchema.parseAsync(credentials);
-      const response = {
-        token: "alphanumeric text",
-      };
+      // const response = {
+      //   token: "alphanumeric text",
+      // };
       //? web storage
       //!cookies, local storage, session storage
       //? cookies: small data, sent with every request, can be httpOnly, secure, sameSite -> clint side cookie and server side cookie
 
       //!js default
-      document.cookie = `token=abc123; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=strict`;
-      document.cookie =
-        "token=" + response.token + "; expiresIn = " + new Date() + "path=/;";
+      // document.cookie = `token=abc123; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()}; path=/; secure; samesite=strict`;
+      // document.cookie =
+      //   "token=" + response.token + "; expiresIn = " + new Date() + "path=/;";
       //!  using js-cookie
       //!set cookie
       // Cookies.set("token", response.token, {
@@ -55,8 +56,20 @@ export default function LoginForm() {
       // sessionStorage.getItem("token");
       // sessionStorage.removeItem("token");
       // sessionStorage.clear();
+      // let response = await fetch(
+      //   `${import.meta.env.VITE_APP_BASE_URL}auth/login`,
+      //   {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(credintial),
+      //   },
+      // );
+      // response = await response.json();
+      // console.log(response);
 
-      console.log(credintial);
+      //! axios
+      const response = await axiosInstance.post("auth/login", credintial);
+      console.log(response);
     } catch (exception: any) {
       console.log(exception);
     }
@@ -95,7 +108,7 @@ export default function LoginForm() {
 
         <div className="w-2/3 flex flex-col gap-1">
           <TextInput
-            type="email"
+            type="text"
             name="username"
             control={control}
             errMsg={errors?.username?.message}
