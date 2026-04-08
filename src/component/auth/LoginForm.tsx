@@ -8,7 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // import Password from "../ui/form/Password";
 import Cookies from "js-cookie";
 import axiosInstance from "../../config/ApiClint";
+import { useNavigate } from "react-router";
 export default function LoginForm() {
+  const router = useNavigate();
   // const [credentials, setCredentials] = useState({
   //   username: "",
   //   password: "",
@@ -68,8 +70,21 @@ export default function LoginForm() {
       // console.log(response);
 
       //! axios
-      const response = await axiosInstance.post("auth/login", credintial);
-      console.log(response);
+      const response = (await axiosInstance.post("auth/login", {
+        ...credintial,
+        expiresInMinutes: 24 * 60,
+      })) as { accessToken: string };
+      Cookies.set("auth_key", response.accessToken, {
+        expires: 1,
+        sameSiteme: "lax",
+        secure: true,
+      });
+
+      const logedInUser = (await axiosInstance.get("auth/me")) as {
+        role: string;
+      };
+      router("/" + logedInUser.role);
+      console.log(logedInUser);
     } catch (exception: any) {
       console.log(exception);
     }

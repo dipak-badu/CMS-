@@ -21,6 +21,7 @@ import UserDetail from "../pages/dashboard/user/UserDetail";
 const routerData = createBrowserRouter([
   { path: "/", element: <HomePage /> },
   { path: "/forget-password", Component: ForgetPassword },
+
   {
     path: "admin",
     Component: AminLayout,

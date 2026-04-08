@@ -77,3 +77,21 @@ setLoading(true);
 useEffect(() => {
 console.log("I am always exectued when credential state is manipulated")
 }, [credentials, loading])
+
+# important HTTP responce status codes
+
+-200 : ok
+-201 : created
+-202 : accepted
+-204 : no content
+-301 : Moved permantntly
+-304 : NOt modified
+-308 : Permanatant requiest
+-400 : Bad request
+-401 : Anautorized
+-403 :forbidden
+-404 : not found
+-408 : request timeout
+-422 : unproskill
+-500
+-502
