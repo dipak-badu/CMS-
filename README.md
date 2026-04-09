@@ -95,3 +95,10 @@ console.log("I am always exectued when credential state is manipulated")
 -422 : unproskill
 -500
 -502
+
+# //! AuthContext -> AuthProvider -> useAuth -> LoginForm
+
+AuthContext -> function decleration
+AuthProvider -> function definition
+useAuth -> custom hook to consume the context
+LoginForm -> component that uses the useAuth hook to perform login operations

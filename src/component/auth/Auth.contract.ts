@@ -36,3 +36,27 @@ export const UserRegisterSchema = z.object({
     .transform((files) => files?.[0])
     .refine((file) => file instanceof File, "Image is required"),
 });
+
+export interface IUserdetail {
+  id: number;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  age: number;
+  gender: string;
+  email: string;
+  phone: string;
+  image: string;
+  username: string;
+  name: string;
+  password: string;
+  address: {
+    state: string;
+    city: string;
+    street: string;
+    building: string;
+    postalCode: string;
+  };
+  country: string;
+  role: string;
+}

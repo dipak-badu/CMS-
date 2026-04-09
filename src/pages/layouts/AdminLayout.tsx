@@ -2,11 +2,9 @@ import Logo from "../../component/logo/Logo";
 import { LuCircleUserRound } from "react-icons/lu";
 import { Outlet } from "react-router";
 import AdminSidebar from "../../component/ui/sidebar/AdminSidebar";
+import { useAuth } from "../../lib/hooks/useAuth";
 export default function AminLayout() {
-  const loggedInUsser = {
-    role: "admin",
-    name: "dipak",
-  };
+  const { authUser } = useAuth();
   return (
     <>
       <section className="w-full  h-screen bg-gray-400">
@@ -25,7 +23,9 @@ export default function AminLayout() {
                   className=" flex items-center gap-3 text-sm font-medium transition-colors focus:relative cursor-pointer"
                 >
                   <LuCircleUserRound className="size-8" />
-                  <span>Dipak Badu</span>
+                  <span>
+                    {authUser?.firstName} {authUser?.lastName}
+                  </span>
                 </button>
               </span>
 
@@ -69,7 +69,8 @@ export default function AminLayout() {
         </header>
 
         <main className="flex w-full gap-5">
-          <AdminSidebar loggedInUser={loggedInUsser} />
+          <AdminSidebar loggedInUser={authUser} />{" "}
+          {/* Pass the loggedInUser as a prop to the AdminSidebar component. This way, the AdminSidebar component can access the loggedInUser details and render the sidebar items based on the user's role. For example, if the loggedInUser has an admin role, the AdminSidebar can render all the sidebar items, but if the loggedInUser has a different role, it can render only a subset of the sidebar items. This allows for role-based access control in the admin dashboard. */}
           <section className="w-full">
             <Outlet />
           </section>
