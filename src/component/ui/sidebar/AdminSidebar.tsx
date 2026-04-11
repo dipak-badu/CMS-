@@ -1,7 +1,12 @@
 import { NavLink } from "react-router";
-export default function AdminSidebar({ loggedInUser }) {
+import type { IUserdetail } from "../../auth/Auth.contract";
+// import { useAuth } from "../../../lib/hooks/useAuth";
+export default function AdminSidebar({
+  loggedInUser,
+}: Readonly<{ loggedInUser: IUserdetail }>) {
+  // const { authUser } = useAuth();
   return (
-    <aside className="w-64">
+    <aside className="w-100">
       <div className="flex h-[90vh] flex-col justify-between border-e border-gray-100 bg-white  ">
         <div className="p-4">
           <ul className=" space-y-1">
@@ -82,26 +87,28 @@ export default function AdminSidebar({ loggedInUser }) {
           </ul>
         </div>
 
-        {/* <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
-          <NavLink
-            to="#"
-            className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50"
-          >
+        <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
+          <article className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
             <img
               alt=""
-              src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?auto=format&amp;fit=crop&amp;q=80&amp;w=1160"
+              src={
+                loggedInUser?.image ||
+                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              }
               className="size-10 rounded-full object-cover"
             />
 
             <div className=" dark:text-black">
-              <p className="text-xs">
-                <strong className="block font-medium">Eric Frusciante</strong>
+              <article className="text-xs text-wrap">
+                <strong className="block font-medium">
+                  {loggedInUser?.firstName} {loggedInUser?.lastName}
+                </strong>
 
-                <span> eric@frusciante.com </span>
-              </p>
+                <span className=""> {loggedInUser?.email} </span>
+              </article>
             </div>
-          </NavLink>
-        </div> */}
+          </article>
+        </div>
       </div>
     </aside>
   );
