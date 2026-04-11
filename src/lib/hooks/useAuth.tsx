@@ -3,8 +3,8 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 
 export const useAuth = () => {
-  const { login, authUser } = useContext(AuthContext);
-  return { login, authUser };
+  const { login, authUser, authLoading } = useContext(AuthContext);
+  return { login, authUser, authLoading };
 };
 
 //! AuthContext -> AuthProvider -> useAuth -> LoginForm

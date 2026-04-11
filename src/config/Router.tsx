@@ -1,49 +1,12 @@
-import {
-  //BrowserRouter,
-  createBrowserRouter,
-  // Route,
-  RouterProvider,
-  useRevalidator,
-  // Routes,
-} from "react-router";
-import HomePage from "../pages/home/HomePage";
-import ForgetPassword from "../pages/home/auth/ForgetPassword";
-import NOtFound from "../pages/error/NotFound";
-import AdminDashboard from "../pages/dashboard/Dashboard";
-import UserList from "../pages/dashboard/user/UserList";
-
-import AminLayout from "./../pages/layouts/AdminLayout";
-import UserLayout from "../pages/layouts/UserLaayout";
-import UserRegister from "../pages/dashboard/user/UserRegister";
-import UserEdit from "../pages/dashboard/user/UserEdit";
-import UserDetail from "../pages/dashboard/user/UserDetail";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { AdminRouter } from "../lib/router/admin.router";
+import { UserRouter } from "../lib/router/user.router";
+import { PublicRouter } from "../lib/router/public.router";
 
 const routerData = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
-  { path: "/forget-password", Component: ForgetPassword },
-
-  {
-    path: "admin",
-    Component: AminLayout,
-    children: [
-      { index: true, Component: AdminDashboard },
-      { path: "users", Component: UserList },
-      { path: "user/create", Component: UserRegister },
-      { path: "user/:id/edit", Component: UserEdit },
-      { path: "user/:id/detail", element: <UserDetail /> },
-    ],
-  },
-
-  { path: "*", Component: NOtFound },
-
-  {
-    path: "/user",
-    Component: UserLayout,
-    children: [
-      { index: true, element: <>User detal page</> },
-      { path: "profile", element: <>User profile page</> },
-    ],
-  },
+  ...PublicRouter,
+  ...AdminRouter,
+  ...UserRouter,
 ]);
 
 export default function RouterConfig() {
@@ -57,3 +20,6 @@ export default function RouterConfig() {
     <RouterProvider router={routerData} />
   );
 }
+
+//? how role based routing is implemented in this code?
+//? role based routing is implemented using the PermissionCheck component. this component takes the allowRole prop, which is the role that is allowed to access the page. it also uses the useAuth hook to get the details of the logged in user, including their role. if the user's role does not match the allowRole prop, it will redirect them to their respective dashboard or show them an error message. this way we can ensure that only authorized users can access the pages that they are allowed to access, and we can also provide a better user experience by redirecting them to their respective dashboards instead of showing them an error message or a blank page.
