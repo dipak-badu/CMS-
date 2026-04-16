@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 // import Password from "../ui/form/Password";
 
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 import { useAuth } from "../../lib/hooks/useAuth";
 export default function LoginForm() {
@@ -161,12 +161,12 @@ export default function LoginForm() {
         </div>
       </div>
       <div className="flex w-full items-center justify-end">
-        <a
-          href="/forget-password"
+        <NavLink
+          to="/forget-password"
           className="text-teal-700 italic text-sm hover:underline hover:text-teal-600 transition hover:scale-96"
         >
           Forgot password?
-        </a>
+        </NavLink>
       </div>
       <div className="flex w-full items-center gap-3">
         <Button className=" hover:bg-red-700 w-full bg-red-800" type="reset">

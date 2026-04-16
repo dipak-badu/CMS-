@@ -2,14 +2,29 @@
 //?fuctional component  => stateless component
 //!export(default(perfor this) , named)
 
-import LeftSidePanel from "../../component/auth/LeftSidePanel";
-import RightSidePanel from "../../component/auth/RightSidePanel";
+import { useOutletContext } from "react-router";
+import LoginForm from "../../component/auth/LoginForm";
+import { useEffect, type Dispatch, type SetStateAction } from "react";
 
+type PageContentState = {
+  pageTitle: string;
+  content: string;
+  formTitle: string;
+};
+
+type HomePageContext = {
+  setPageContent: Dispatch<SetStateAction<PageContentState>>;
+};
 export default function HomePage() {
-  return (
-    <section className=" bg-gray-300 flex h-screen p-5  gap-2  sm:flex sm:flex-row md:flex-row ">
-      <LeftSidePanel />
-      <RightSidePanel />
-    </section>
-  );
+  const { setPageContent } = useOutletContext<HomePageContext>();
+  useEffect(() => {
+    console.log("home page loaded");
+    setPageContent({
+      pageTitle: "Welcome to CMS!!",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugitdoloremque accusantium facilis nostrum amet? Eveniet eius quae beataevoluptates odit ullam nostrum temporibus animi iusto laborum.Consectetur libero repudiandae quibusdam!",
+      formTitle: "Sign In",
+    });
+  });
+  return <LoginForm />;
 }

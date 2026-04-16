@@ -8,8 +8,8 @@ export default function AminLayout() {
   const { authUser } = useAuth();
   return (
     <>
-      <section className="w-full  h-screen bg-gray-400">
-        <header className=" py-2 px-5 w-full shadow bg-gray-300  flex justify-between text-emerald-900 ">
+      <section className="w-full  bg-gray-200 items-stretch">
+        <header className="fixed inset-x-0 top-0  py-2 px-5 w-full shadow bg-gray-300  flex justify-between text-emerald-900 m ">
           <div className="flex items-center gap-4">
             <Logo className=" h-10 w-10    "></Logo>
             <span className="text-2xl font-semibold  text-shadow-lg">
@@ -69,10 +69,10 @@ export default function AminLayout() {
           </div>
         </header>
 
-        <main className="flex w-full gap-5">
+        <main className="flex w-full gap-5   bg-gray-300  mt-14  ">
           {authUser && <AdminSidebar loggedInUser={authUser} />}{" "}
           {/* Pass the loggedInUser as a prop to the AdminSidebar component. This way, the AdminSidebar component can access the loggedInUser details and render the sidebar items based on the user's role. For example, if the loggedInUser has an admin role, the AdminSidebar can render all the sidebar items, but if the loggedInUser has a different role, it can render only a subset of the sidebar items. This allows for role-based access control in the admin dashboard. */}
-          <section className="w-full">
+          <section className="w-full min-h-screen">
             <Outlet />
           </section>
         </main>

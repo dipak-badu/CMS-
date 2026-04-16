@@ -1,16 +1,17 @@
 import { NavLink } from "react-router";
 import type { IUserdetail } from "../../auth/Auth.contract";
 // import { useAuth } from "../../../lib/hooks/useAuth";
+import AllowAccess from "../../auth/AllowAccess";
 export default function AdminSidebar({
   loggedInUser,
 }: Readonly<{ loggedInUser: IUserdetail }>) {
   // const { authUser } = useAuth();
   return (
-    <aside className="w-100">
-      <div className="flex h-[90vh] flex-col justify-between border-e border-gray-100 bg-white  ">
+    <aside className="w-100 min-h-screen ">
+      <div className="flex  flex-col justify-between border-gray-100 bg-gray-200 rounded-lg ">
         <div className="p-4">
           <ul className=" space-y-1">
-            {loggedInUser && loggedInUser.role === "admin" && (
+            <AllowAccess role="admin">
               <li>
                 <NavLink
                   to="/admin"
@@ -20,7 +21,16 @@ export default function AdminSidebar({
                   Dasboard
                 </NavLink>
               </li>
-            )}
+
+              <li>
+                <NavLink
+                  to="/admin/users"
+                  className="block rounded-lg bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transform transition-transform duration-200 hover:scale-95"
+                >
+                  Users
+                </NavLink>
+              </li>
+            </AllowAccess>
 
             <li>
               <NavLink
@@ -38,14 +48,6 @@ export default function AdminSidebar({
                 className="block rounded-lg bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transform transition-transform duration-200 hover:scale-95"
               >
                 Menu
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/users"
-                className="block rounded-lg bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transform transition-transform duration-200 hover:scale-95"
-              >
-                Users
               </NavLink>
             </li>
 
@@ -87,8 +89,8 @@ export default function AdminSidebar({
           </ul>
         </div>
 
-        <div className="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
-          <article className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
+        <div className="fixed inset-x-0 bottom-0   gray-100  w-83 ">
+          <article className="flex items-center  gap-2 p-4  bg-gray-200 hover:bg-gray-300 ">
             <img
               alt=""
               src={

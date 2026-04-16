@@ -20,7 +20,7 @@ export default function AuthProvider({
     try {
       const loggedInUser: IUserdetail = await axiosInstance.get("auth/me");
       setAuthuser(loggedInUser);
-      console.log(loggedInUser);
+      // console.log(loggedInUser);
       return loggedInUser;
     } catch (exception: any) {
       console.log(exception);
@@ -47,19 +47,17 @@ export default function AuthProvider({
       console.log(exception);
       throw exception;
     } finally {
-      // setAuthLoading(false);
+      setAuthLoading(false);
     } //! this will ensure that the loading state is set to false after the login process is completed, regardless of whether it was successful or not. this way we can show the loading state while the login process is going on and hide it when the process is completed.
   };
 
   useEffect(() => {
-    return () => {
-      const token = Cookies.get("auth_key");
-      if (token) {
-        getLoggedInUser();
-      }
-      setAuthLoading(false);
-    };
-  }); //! this useEffect is used to check if the user is already logged in when the component is mounted. it checks for the presence of the auth_key cookie, and if it exists, it calls the getLoggedInUser function to fetch the logged in user details and set the authUser state. it also sets the authLoading state to false after the authentication process is completed. this way we can ensure that the user is authenticated and we have the logged in user details available in the context when the component is rendered.
+    const token = Cookies.get("auth_key");
+    if (token) {
+      getLoggedInUser();
+    }
+    setAuthLoading(false);
+  }, []); //! this useEffect is used to check if the user is already logged in when the component is mounted. it checks for the presence of the auth_key cookie, and if it exists, it calls the getLoggedInUser function to fetch the logged in user details and set the authUser state. it also sets the authLoading state to false after the authentication process is completed. this way we can ensure that the user is authenticated and we have the logged in user details available in the context when the component is rendered.
 
   return authLoading ? (
     <section>
