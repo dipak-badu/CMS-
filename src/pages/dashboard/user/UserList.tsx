@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClint";
 import type { IUserdetail } from "../../../component/auth/Auth.contract";
+import { ucFirst } from "../../../lib/utilities/Helper";
 // import { fi } from "zod/v4/locales";
 
 export interface IUserListResponse {
@@ -25,6 +26,7 @@ export interface IPagenationType {
   skip: number;
   total: number;
   totalNoOfPages: number;
+  currPage?: Number;
 }
 export default function UserList() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,6 +36,7 @@ export default function UserList() {
     skip: 0,
     total: 0,
     totalNoOfPages: 1,
+    currPage: 1,
   });
 
   const getAllUsers = async (
@@ -64,9 +67,19 @@ export default function UserList() {
     }
   };
 
+  const handelPageChange = async (page = 1) => {
+    const skip = (page - 1) * pagination.limit;
+    setLoading(true);
+    await getAllUsers(pagination.limit, skip);
+    setPagenation({
+      ...pagination,
+      currPage: page,
+    });
+  }; // this is the function to handel page change when user click on page number in pagination
+
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, []); //
   return (
     <section className=" bg-white w-full mt-4 min-h-screen  p-2">
       <div className=" flex justify-between items-center rounded-md border-b border-b-emerald-950/50 pt-1 pl-2">
@@ -133,13 +146,18 @@ export default function UserList() {
                     </div>
                   </td>
                   <td className="border border-gray-600 p-2 text-center">
-                    {user.email}
+                    <a
+                      href={`mailto:${user.email}`}
+                      className="text-teal-700 underline"
+                    >
+                      {user.email}
+                    </a>
                   </td>
                   <td className="border border-gray-600 p-2 text-center">
-                    {user.role}
+                    {ucFirst(user.role)}
                   </td>
                   <td className="border border-gray-600 p-2 text-center">
-                    {user.gender}
+                    {ucFirst(user.gender)}
                   </td>
                   <td className=" border border-gray-600 p-2 text-center">
                     <div className="flex justify-center items-center gap-3 h-6">
@@ -159,21 +177,17 @@ export default function UserList() {
           <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
             <LuChevronLeft />
           </li>
-          <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
-            <span>1</span>
-          </li>
-          <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
-            <span>2</span>
-          </li>
-          <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
-            <span>3</span>
-          </li>
-          <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
-            <span>4</span>
-          </li>
-          <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
-            <span>4</span>
-          </li>
+          {[...Array(pagination.totalNoOfPages)].map((_, i: number) => (
+            <li
+              className={`bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-pointer hover:bg-teal-700 ${i + 1 === pagination.currPage ? "bg-teal-700" : "bg-gray-100"}`}
+              onClick={() => {
+                handelPageChange(i + 1);
+              }}
+            >
+              <span>{i + 1}</span>
+            </li>
+          ))}
+
           <li className=" bg-gray-100 flex items-center justify-center rounded-full shadow-lg size-7 cursor-p hover:bg-teal-700">
             <LuChevronRight />
           </li>
