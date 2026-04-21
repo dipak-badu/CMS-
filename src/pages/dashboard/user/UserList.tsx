@@ -7,11 +7,13 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import TdDelete from "../../../component/ui/table/TdDelete";
 import AllowAccess from "./../../../component/auth/AllowAccess";
 import { RowSkeleton } from "../../../component/ui/table/Skeleton";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClint";
 import type { IUserdetail } from "../../../component/auth/Auth.contract";
 import { ucFirst } from "../../../lib/utilities/Helper";
+import { set } from "zod";
+import { get } from "react-hook-form";
 // import { fi } from "zod/v4/locales";
 
 export interface IUserListResponse {
@@ -29,6 +31,7 @@ export interface IPagenationType {
   currPage?: Number;
 }
 export default function UserList() {
+  const [keyword, setKeyword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<Array<IUserdetail> | null>(null);
   const [pagination, setPagenation] = useState<IPagenationType>({
@@ -39,25 +42,52 @@ export default function UserList() {
     currPage: 1,
   });
 
-  const getAllUsers = async (
-    limit = pagination.limit,
-    skip = pagination.skip,
-  ) => {
+  const getAllUsers = useCallback(
+    async (limit = pagination.limit, skip = pagination.skip) => {
+      try {
+        const response = (await axiosInstance.get("users", {
+          params: {
+            limit: limit,
+            skip: skip,
+            select: "id,firstName,lastName,email,role,gender,image",
+          },
+        })) as IUserListResponse;
+        setUsers(response.users);
+        // console.log(response.users.forEach((user) => console.log(user)));
+        setPagenation({
+          limit: +response.limit,
+          skip: +response.skip,
+          total: +response.total,
+          totalNoOfPages: Math.ceil(+response.total / +response.limit),
+        });
+      } catch (error) {
+        console.log(error);
+        toast.error("Failed to fetch users. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [pagination],
+  );
+
+  const getSearchedUsers = useCallback(async (search = "") => {
     try {
-      const response = (await axiosInstance.get("users", {
+      setLoading(true);
+      const response = (await axiosInstance.get("users/search", {
         params: {
-          limit: limit,
-          skip: skip,
-          select: "id,firstName,lastName,email,role,gender,image",
+          q: search,
+          limit: pagination.limit,
+          skip: pagination.skip,
         },
       })) as IUserListResponse;
       setUsers(response.users);
-      console.log(response.users.forEach((user) => console.log(user)));
+
       setPagenation({
         limit: +response.limit,
         skip: +response.skip,
         total: +response.total,
         totalNoOfPages: Math.ceil(+response.total / +response.limit),
+        currPage: 1,
       });
     } catch (error) {
       console.log(error);
@@ -65,7 +95,7 @@ export default function UserList() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const handelPageChange = async (page = 1) => {
     const skip = (page - 1) * pagination.limit;
@@ -78,8 +108,24 @@ export default function UserList() {
   }; // this is the function to handel page change when user click on page number in pagination
 
   useEffect(() => {
-    getAllUsers();
-  }, []); //
+    const delay = setTimeout(() => {
+      if (keyword.trim() !== "") {
+        getSearchedUsers(keyword);
+      } else {
+        getAllUsers();
+      }
+    }, 500);
+    return () => clearTimeout(delay);
+  }, [keyword]); // we are adding keyword in dependency array because we want to call this function when keyword change
+
+  useEffect(() => {
+    const handleAllUsers = async () => {
+      await getAllUsers();
+    };
+    return () => {
+      handleAllUsers();
+    };
+  }, [getAllUsers]); // we are adding getAllUsers in dependency array because we want to call this function when component unmount and also when getAllUsers function change
   return (
     <section className=" bg-white w-full mt-4 min-h-screen  p-2">
       <div className=" flex justify-between items-center rounded-md border-b border-b-emerald-950/50 pt-1 pl-2">
@@ -93,6 +139,9 @@ export default function UserList() {
               type="search"
               className="px-3 py-2 w-full border border-gray-300 rounded-md shadow-sm pr-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
               placeholder="Enter your search keyword..."
+              onChange={(e) => {
+                setKeyword(e.target.value);
+              }}
             />
             <CiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-lg text-gray-600" />
           </div>
