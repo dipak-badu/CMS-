@@ -34,11 +34,11 @@ export default function AdminSidebar({
 
             <li>
               <NavLink
-                to="/admin/food-items"
+                to="/admin/products"
                 className="block rounded-lg bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700  transform transition-transform duration-200 hover:scale-95 "
                 end
               >
-                Food Items
+                Products
               </NavLink>
             </li>
 

@@ -6,6 +6,7 @@ import AdminDashboard from "../../pages/dashboard/Dashboard";
 import UserDetail from "../../pages/dashboard/user/UserDetail";
 import UserEdit from "../../pages/dashboard/user/UserEdit";
 import UserRegister from "../../pages/dashboard/user/UserRegister";
+import ProductList from "../../pages/products/ProductList";
 
 export const AdminRouter = [
   {
@@ -37,6 +38,7 @@ export const AdminRouter = [
       { path: "user/create", Component: UserRegister },
       { path: "user/:id/edit", Component: UserEdit },
       { path: "user/:id/detail", element: <UserDetail /> },
+      { path: "products", Component: ProductList },
     ],
   },
 ];
