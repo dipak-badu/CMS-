@@ -2,11 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { AdminRouter } from "../lib/router/admin.router";
 import { UserRouter } from "../lib/router/user.router";
 import { PublicRouter } from "../lib/router/public.router";
+import { ProductRouter } from "../lib/router/product.router";
 
 const routerData = createBrowserRouter([
   ...PublicRouter,
   ...AdminRouter,
   ...UserRouter,
+  ...ProductRouter,
 ]);
 
 export default function RouterConfig() {
