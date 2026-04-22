@@ -211,7 +211,11 @@ export default function UserList() {
                   <td className=" border border-gray-600 p-2 text-center">
                     <div className="flex justify-center items-center gap-3 h-6">
                       <TdEdit />
-                      <TdDelete />
+                      <TdDelete
+                        userId={user.id as number}
+                        users={users}
+                        setUsers={setUsers}
+                      />
                     </div>
                   </td>
                 </tr>

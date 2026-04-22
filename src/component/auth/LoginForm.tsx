@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NavLink, useNavigate } from "react-router";
 
 import { useAuth } from "../../lib/hooks/useAuth";
+import { toast } from "sonner";
 export default function LoginForm() {
   const router = useNavigate();
   // const [credentials, setCredentials] = useState({
@@ -106,7 +107,7 @@ export default function LoginForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ICredential>({
     defaultValues: {
       username: "",
@@ -122,8 +123,10 @@ export default function LoginForm() {
       const loggedInUser = (await login(credential)) as IUserdetail;
       console.log(loggedInUser);
       if (loggedInUser) router("/" + loggedInUser.role);
+      toast.success("Login successful!");
     } catch (exception) {
       console.error(exception);
+      toast.error("Login failed. Please check your credentials and try again.");
     }
   };
 
@@ -172,7 +175,11 @@ export default function LoginForm() {
         <Button className=" hover:bg-red-700 w-full bg-red-800" type="reset">
           Reset{" "}
         </Button>
-        <Button className=" hover:bg-teal-700 w-full bg-teal-800" type="submit">
+        <Button
+          className=" disabled:bg-red-900/20 disabled:cursor-not-allowed hover:bg-teal-700 w-full bg-teal-800"
+          type="submit"
+          disabled={isSubmitting}
+        >
           submit{" "}
         </Button>
       </div>

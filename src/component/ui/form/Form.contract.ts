@@ -27,6 +27,7 @@ export interface IButtonProps {
   className?: string;
   type: string;
   children: ReactNode;
+  disabled?: boolean;
 }
 
 export interface ISingleOption {
