@@ -7,7 +7,7 @@ export const ProductRouter = [
     element: <ProductLayout />,
     children: [
       { index: true, Component: ProductList },
-      { path: "/:slug", Component: ProductList },
+      { path: ":slug", Component: ProductList },
     ],
   },
 ];

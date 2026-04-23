@@ -14,5 +14,6 @@ createRoot(document.getElementById("root")!).render(
     <AuthProvider>
       <RouterConfig />
     </AuthProvider>
+    <header>my name is dipak</header>
   </StrictMode>,
 );

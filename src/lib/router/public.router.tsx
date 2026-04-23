@@ -6,7 +6,6 @@ import AuthLayout from "../../pages/layouts/AuthLayout";
 export const PublicRouter = [
   // { path: "/", element: <HomePage /> },
   // { path: "/forget-password", Component: ForgetPassword },
-  { path: "*", Component: NOtFound },
 
   {
     path: "/",
@@ -16,4 +15,6 @@ export const PublicRouter = [
       { path: "forget-password", Component: ForgetPassword },
     ],
   },
+
+  { path: "/*", Component: NOtFound },
 ];
