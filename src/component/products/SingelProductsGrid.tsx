@@ -43,7 +43,7 @@ export default function SingelProductsGrid({
   product: IproductDetails;
 }) {
   return (
-    <div className="w-full border border-gray-100 rounded-xl shadow-sm flex flex-col overflow-hidden bg-white hover:shadow-md transition">
+    <div className="w-full border border-gray-100 rounded-xl shadow-sm flex flex-col overflow-hidden bg-white hover:shadow-md transition p-1">
       {/* Image */}
       <img
         src={product.thumbnail}
@@ -79,7 +79,7 @@ export default function SingelProductsGrid({
 
         {/* View Details */}
         <NavLink
-          to={`/products/${product.id}`}
+          to={`/product/${product.id}`}
           className="text-xs text-gray-500 hover:text-teal-900"
         >
           View Details
@@ -87,12 +87,20 @@ export default function SingelProductsGrid({
       </div>
 
       {/* Button */}
-      <NavLink
-        to={`/products/${product.id}/buy`}
-        className="text-sm text-white w-full text-center bg-red-900/80 py-2 hover:bg-red-600 transition"
-      >
-        Buy Now
-      </NavLink>
+      <div className="flex gap-2 w-full">
+        <NavLink
+          to={`/product/${product.id}/buy`}
+          className="text-sm text-white w-full text-center bg-teal-900/80 py-2 hover:bg-teal-600 transition rounded"
+        >
+          Add to Cart
+        </NavLink>
+        <NavLink
+          to={`/product/${product.id}/buy`}
+          className="text-sm text-white w-full text-center bg-red-900/80 py-2 hover:bg-red-600 transition rounded"
+        >
+          Buy Now
+        </NavLink>
+      </div>
     </div>
   );
 }

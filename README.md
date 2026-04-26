@@ -114,3 +114,15 @@ role based routing is implemented using the PermissionCheck component. this comp
 3.useCallback -> we can use useCallback to memoize the functions and prevent unnecessary re-creations. for example, we can memoize the getAllUsers and getSearchedUsers functions and only re-create them when the dependencies change. this will improve the performance of the application by reducing the number of function re-creations.
 4.useMemo -> we can use useMemo to memoize the values and prevent unnecessary re-calculations. for example, we can memoize the filtered users list and only re-calculate it when the dependencies change. this will improve the performance of the application by reducing the number of unnecessary calculations.
 5.lazy loading -> we can use lazy loading to load the images and other resources on demand. for example, we can use the loading="lazy" attribute on the img tag to load the images only when they are in the viewport. this will improve the performance of the application by reducing the initial load time and improving the user experience.
+
+# context
+
+- Decleration (create craeateContext)
+- Defination (contex Provider setup)
+- Consume (custome hook, useContext)
+
+# Redux
+
+- Decleration (store , cinfigureStore)
+- Provider (Global Provider / reducer)
+- consume/Listener/state/(Hook)
