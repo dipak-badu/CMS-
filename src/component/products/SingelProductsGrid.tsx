@@ -95,7 +95,7 @@ export default function SingelProductsGrid({
           Add to Cart
         </NavLink>
         <NavLink
-          to={`/product/${product.id}/buy`}
+          to={`/product/${product.id}/add-to-wishlist`}
           className="text-sm text-white w-full text-center bg-red-900/80 py-2 hover:bg-red-600 transition rounded"
         >
           Buy Now
